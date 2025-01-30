@@ -1,5 +1,6 @@
-<?= $this->include('layout/header') ?>
+<?= $this->include('layout/head') ?>
 <?= $this->include('layout/sidebar') ?>
+<?= $this->include('layout/header') ?>
 
 <h2>Dashboard Monitoring</h2>
 <table class="table table-bordered">

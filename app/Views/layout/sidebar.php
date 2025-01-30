@@ -1,16 +1,27 @@
-<div class="d-flex">
-    <div class="bg-light sidebar" style="width: 250px; height: 100vh; position: fixed;">
-        <ul class="nav flex-column p-3">
-            <li class="nav-item">
-                <a class="nav-link <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
-                    <i class="fas fa-chart-line"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
-                    <i class="fas fa-history"></i> Data History
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="content" style="margin-left: 260px; padding: 20px; width: 100%;">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <!-- <i class="fas fa-laugh-wink"></i> -->
+            <i class="fas fa-plug"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">IoT <sup>Monitoring</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>History</span></a>
+    </li>
+
+</ul>
