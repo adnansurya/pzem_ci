@@ -14,7 +14,7 @@ class Dashboard extends BaseController
     public function getLatestData()
     {
         $pzemModel = new PzemModel();
-        $data = $pzemModel->getLatestData();
+        $data = $pzemModel->getLatestDataByPhase();
 
         // Ubah format waktu sebelum dikirim ke view
         foreach ($data as &$row) {

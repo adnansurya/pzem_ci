@@ -43,7 +43,7 @@
             dataType: "json",
             success: function(response) {
                 let content = "";
-                response.reverse().forEach((data) => {
+                response.forEach((data) => {
                     let cardColor = "default";
                     if (data.phase == "R") {
                         cardColor = "danger";
@@ -82,8 +82,14 @@
                                         <div class="col-6">
                                         <p>Energi <br> <h4> ${data.power} Wh</h4></p> 
                                         </div>
-                                    </div>                                                               
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-12">  
+                                            <p>Status <br> <h4>${data.status}</h4> </p>
+                                        </div>
+                                    </div>                                                          
                                 </div>
+                                
                                 <div class="card-footer bg-${cardColor} text-white pb-0">
                                     <p><small>Diperbarui pada</small> <br> ${data.created_at}</p>
                                 </div> 
