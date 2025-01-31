@@ -9,6 +9,7 @@
             <table id="historyTable" class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
+                        <th>No.</th>
                         <th>Fasa</th>
                         <th>Arus (A)</th>
                         <th>Tegangan (V)</th>
@@ -23,6 +24,7 @@
                 <tbody>
                     <?php foreach ($sensorHistory as $sensor): ?>
                         <tr>
+                            <td><?= esc($sensor['id']) ?></td>
                             <td><?= esc($sensor['phase']) ?></td>
                             <td><?= esc($sensor['current']) ?></td>
                             <td><?= esc($sensor['voltage']) ?></td>

@@ -112,7 +112,7 @@
                 "autoWidth": false,
                 "pageLength": 10, // Jumlah data per halaman
                 "order": [
-                    [1, "desc"]
+                    [0, "desc"]
                 ], // Urutkan berdasarkan kolom waktu terbaru
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/Indonesian.json"
