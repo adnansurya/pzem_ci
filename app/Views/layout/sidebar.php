@@ -20,7 +20,7 @@
     </li>
     <li class="nav-item">
     <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-list"></i>
             <span>History</span></a>
     </li>
 
