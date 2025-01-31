@@ -26,8 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="vendor/datatables/datatables.min.js"></script>
 
 
 <!-- Core plugin JavaScript-->
@@ -115,7 +114,18 @@
                     [0, "desc"]
                 ], // Urutkan berdasarkan kolom waktu terbaru
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/Indonesian.json"
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    "infoEmpty": "Tidak ada data tersedia",
+                    "infoFiltered": "(disaring dari total _MAX_ data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Awal",
+                        "last": "Akhir",
+                        "next": "Berikutnya",
+                        "previous": "Sebelumnya"
+                    }
                 }
             });
         <?php endif ?>
