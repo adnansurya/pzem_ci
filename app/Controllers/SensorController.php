@@ -32,7 +32,9 @@ class SensorController extends Controller
             'current' => $this->request->getPost('current'),
             'voltage' => $this->request->getPost('voltage'),
             'frequency' => $this->request->getPost('frequency'),
-            'power' => $this->request->getPost('power'),
+            'power' => $this->request->getPost('power'),           
+            'pf' => $this->request->getPost('pf'),
+            'energy' => $this->request->getPost('energy'),
             'status' => $this->request->getPost('status'), // Tambahkan status
         ];
 
