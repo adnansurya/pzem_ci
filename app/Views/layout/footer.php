@@ -26,6 +26,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
 
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -41,19 +44,50 @@
             dataType: "json",
             success: function(response) {
                 let content = "";
-                response.forEach((data) => {
+                response.reverse().forEach((data) => {
+                    let cardColor = "default";
+                    if (data.phase == "R") {
+                        cardColor = "danger";
+                    } else if (data.phase == "S") {
+                        cardColor = "warning";
+                    } else if (data.phase == "T") {
+                        cardColor = "dark";
+                    }
                     content += `
                         <div class="col-md-4">
-                            <div class="card border-primary mb-3">
-                                <div class="card-header bg-primary text-white text-center">
-                                    Fasa ${data.phase}
+                            <div class="card border-${cardColor} mb-3">
+                                <div class="card-header bg-${cardColor} text-white text-center">
+                                    <h4> Fasa ${data.phase} </h4>
                                 </div>
                                 <div class="card-body text-center">
-                                    <p>Arus:<strong> ${data.current} A</strong></p>
-                                    <p>Tegangan:<strong> ${data.voltage} V</strong></p>
-                                    <p>Frekuensi:<strong> ${data.frequency} Hz</strong></p>
-                                    <p>Daya:<strong> ${data.power} W</strong></p>                            
+                                    <div class="row">
+                                        <div class="col-6">
+                                        <p>Arus <br> <h4> ${data.current} A</h4></p>
+                                        </div>
+                                        <div class="col-6">
+                                        <p>Tegangan <br> <h4> ${data.voltage} V</h4></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                        <p>Frekuensi <br> <h4> ${data.frequency} Hz</h4></p>
+                                        </div>
+                                        <div class="col-6">
+                                        <p>Daya <br> <h4> ${data.power} W</h4></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                        <p>Pf <br> <h4> ${data.pf}</h4></p>
+                                        </div>
+                                        <div class="col-6">
+                                        <p>Energi <br> <h4> ${data.power} Wh</h4></p> 
+                                        </div>
+                                    </div>                                                               
                                 </div>
+                                <div class="card-footer bg-${cardColor} text-white pb-0">
+                                    <p><small>Diperbarui pada</small> <br> ${data.created_at}</p>
+                                </div> 
                             </div>
                         </div>`;
                 });
@@ -62,9 +96,30 @@
         });
     }
 
+
+
     $(document).ready(function() {
-        loadSensorData(); // Load pertama kali
-        setInterval(loadSensorData, 5000); // Refresh setiap 5 detik
+
+        <?php $current_page = str_replace('index.php/', '', current_url()); ?>
+
+        <?php if ($current_page == base_url('dashboard')) : ?>
+            loadSensorData(); // Load pertama kali
+            setInterval(loadSensorData, 5000); // Refresh setiap 5 detik
+
+        <?php elseif ($current_page == base_url('history')) : ?>
+            $('#historyTable').DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "pageLength": 10, // Jumlah data per halaman
+                "order": [
+                    [1, "desc"]
+                ], // Urutkan berdasarkan kolom waktu terbaru
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/Indonesian.json"
+                }
+            });
+        <?php endif ?>
+
     });
 </script>
 

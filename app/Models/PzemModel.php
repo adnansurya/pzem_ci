@@ -11,7 +11,7 @@ class PzemModel extends Model
 
     public function getLatestData()
     {
-        return $this->select('phase, current, voltage, frequency, power, pf, energy, status')
+        return $this->select('phase, current, voltage, frequency, power, pf, energy, status, created_at')
                     ->orderBy('created_at', 'DESC')
                     ->groupBy('phase')
                     ->findAll();
