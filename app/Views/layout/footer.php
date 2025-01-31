@@ -44,18 +44,22 @@
             success: function(response) {
                 let content = "";
                 response.forEach((data) => {
-                    let cardColor = "default";
+                    let cardColor = "gray";
+                    let cardTextColor = "gray";
                     if (data.phase == "R") {
                         cardColor = "danger";
+                        cardTextColor = "white";
                     } else if (data.phase == "S") {
                         cardColor = "warning";
+                        cardTextColor = "dark";
                     } else if (data.phase == "T") {
                         cardColor = "dark";
+                        cardTextColor = "white";
                     }
                     content += `
                         <div class="col-md-4">
                             <div class="card border-${cardColor} mb-3">
-                                <div class="card-header bg-${cardColor} text-white text-center">
+                                <div class="card-header bg-${cardColor} text-${cardTextColor} text-center">
                                     <h4> Fasa ${data.phase} </h4>
                                 </div>
                                 <div class="card-body text-center">
@@ -90,7 +94,7 @@
                                     </div>                                                          
                                 </div>
                                 
-                                <div class="card-footer bg-${cardColor} text-white pb-0">
+                                <div class="card-footer bg-${cardColor} text-${cardTextColor} pb-0">
                                     <p><small>Diperbarui pada</small> <br> ${data.created_at}</p>
                                 </div> 
                             </div>
