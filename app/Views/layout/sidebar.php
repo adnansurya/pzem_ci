@@ -19,9 +19,19 @@
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-    <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
+        <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
             <i class="fas fa-list"></i>
             <span>History</span></a>
     </li>
+
+    <?php if (session('role') == 'admin') : ?>
+
+    <li class="nav-item">
+        <a class="nav-link <?= (current_url() == base_url('admin/users')) ? 'active' : '' ?>" href="<?= base_url('admin/users') ?>">
+            <i class="fas fa-user"></i>
+            <span>Users</span></a>
+    </li>  
+    
+    <?php endif ?>
 
 </ul>
