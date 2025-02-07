@@ -14,12 +14,12 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>" href="/dashboard">
+        <a class="nav-link <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-    <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="/history">
+    <a class="nav-link <?= (current_url() == base_url('history')) ? 'active' : '' ?>" href="<?= base_url('history') ?>">
             <i class="fas fa-list"></i>
             <span>History</span></a>
     </li>
