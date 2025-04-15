@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\SensorModel;
+use \App\Models\NotifikasiModel;
 use CodeIgniter\Controller;
 
 class SensorController extends Controller
@@ -25,20 +26,39 @@ class SensorController extends Controller
 
     public function saveData()
     {
-        $sensorModel = new SensorModel();
+        $request = $this->request;
 
-        $data = [
-            'phase' => $this->request->getPost('phase'),
-            'current' => $this->request->getPost('current'),
-            'voltage' => $this->request->getPost('voltage'),
-            'frequency' => $this->request->getPost('frequency'),
-            'power' => $this->request->getPost('power'),           
-            'pf' => $this->request->getPost('pf'),
-            'energy' => $this->request->getPost('energy'),
-            'status' => $this->request->getPost('status'), // Tambahkan status
+        $sensorModel = new SensorModel();
+        $notifModel  = new NotifikasiModel();
+
+        $fase   = $request->getPost('phase');
+        $status = $request->getPost('status');
+
+        $dataBaru = [
+            'phase' => $fase,
+            'current' => $request->getPost('current'),
+            'voltage' => $request->getPost('voltage'),
+            'frequency' => $request->getPost('frequency'),
+            'power' => $request->getPost('power'),
+            'pf' => $request->getPost('pf'),
+            'energy' => $request->getPost('energy'),
+            'status' => $status, // Tambahkan status
         ];
 
-        $sensorModel->insert($data);
+        // Ambil data terakhir berdasarkan fase
+        $dataLama = $sensorModel->where('phase', $fase)->orderBy('id', 'DESC')->first();
+
+        // Simpan data baru
+        $sensorModel->insert($dataBaru);
+
+        // Jika status berubah, buat notifikasi
+        if ($dataLama && $dataLama['status'] !== $status) {
+            $notifModel->insert([
+                'fase'      => $fase,
+                'parameter' => 'status',
+                'pesan'     => "Fase {$fase} berubah dari {$dataLama['status']} ke {$status}"
+            ]);
+        }
 
         return $this->response->setJSON(['status' => 'success']);
     }
