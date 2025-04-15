@@ -70,23 +70,7 @@
                                         <div class="col-6">
                                         <p>Tegangan <br> <h4> ${data.voltage} V</h4></p>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                        <p>Frekuensi <br> <h4> ${data.frequency} Hz</h4></p>
-                                        </div>
-                                        <div class="col-6">
-                                        <p>Daya <br> <h4> ${data.power} W</h4></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                        <p>Pf <br> <h4> ${data.pf}</h4></p>
-                                        </div>
-                                        <div class="col-6">
-                                        <p>Energi <br> <h4> ${data.power} Wh</h4></p> 
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="row"> 
                                         <div class="col-12">  
                                             <p>Status <br> <h4>${data.status}</h4> </p>
