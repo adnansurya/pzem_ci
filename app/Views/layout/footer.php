@@ -12,6 +12,20 @@
     </div>
 </footer>
 
+<div class="modal fade" id="modalNotifRealtime" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-default">
+                <h5 class="modal-title">⚠️ Notifikasi</h5>
+                <button type="button" class="btn-close" data-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalNotifBody">
+                <!-- isi notifikasi -->
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 <!-- End of Content Wrapper -->
 
@@ -36,6 +50,64 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <script>
+    function loadNotifikasiTerbaru() {
+        $.ajax({
+            url: "<?= base_url('get-notifikasi-terbaru') ?>",
+            method: "GET",
+            dataType: "json",
+            success: function(res) {
+                let html = '';
+                res.forEach(notif => {
+                    html += `
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">${formatTanggal(notif.created_at)}</div>
+                            <span class="font-weight-bold">${notif.pesan}</span>
+                        </div>
+                    </a>`;
+                });
+
+                $('#dropdownNotifikasi').html(html);
+            }
+        });
+    }
+
+    function formatTanggal(timestamp) {
+        const date = new Date(timestamp);
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        return date.toLocaleDateString('id-ID', options);
+    }
+
+    // Panggil saat halaman load dan refresh setiap 5 detik
+    loadNotifikasiTerbaru();
+    setInterval(loadNotifikasiTerbaru, 5000);
+
+    setInterval(() => {
+        $.ajax({
+            url: "<?= base_url('cek-notif') ?>",
+            method: "GET",
+            dataType: "json",
+            success: function(res) {
+                if (res.success) {
+                    $('#modalNotifBody').html(res.pesan);
+                    let modal = new bootstrap.Modal(document.getElementById('modalNotifRealtime'));
+                    modal.show();
+                }
+            }
+        });
+    }, 1000); // setiap 1 detik
+
     function loadSensorData() {
         $.ajax({
             url: "<?= base_url('get-latest-data') ?>", // Panggil API

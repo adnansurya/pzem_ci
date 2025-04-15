@@ -45,18 +45,26 @@ class SensorController extends Controller
             'status' => $status, // Tambahkan status
         ];
 
-        // Ambil data terakhir berdasarkan fase
-        $dataLama = $sensorModel->where('phase', $fase)->orderBy('id', 'DESC')->first();
+        // Ambil satu data terakhir (tanpa filter fase)
+        $dataLama = $sensorModel->orderBy('id', 'DESC')->first();
 
         // Simpan data baru
         $sensorModel->insert($dataBaru);
 
         // Jika status berubah, buat notifikasi
         if ($dataLama && $dataLama['status'] !== $status) {
+
+            $pesan = '-';
+
+            if ($status == 'Disconnected') {
+                $pesan = "Sirkuit Terputus";
+            } else {
+                $pesan = "Status berubah dari {$dataLama['status']} ke {$status}";
+            }
+
             $notifModel->insert([
                 'fase'      => $fase,
-                'parameter' => 'status',
-                'pesan'     => "Fase {$fase} berubah dari {$dataLama['status']} ke {$status}"
+                'pesan'     => $pesan
             ]);
         }
 

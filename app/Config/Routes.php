@@ -10,6 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->post('/save-data', 'SensorController::saveData');
 // $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/get-latest-data', 'Dashboard::getLatestData');
+$routes->get('/cek-notif', 'Dashboard::cekNotifikasiBaru');
+$routes->get('/get-notifikasi-terbaru', 'Dashboard::getNotifikasiTerbaru');
+
 // $routes->get('/history', 'History::index');
 
 $routes->get('/login', 'Auth::login');
